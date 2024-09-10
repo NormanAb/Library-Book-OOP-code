@@ -1,8 +1,4 @@
-package Uzduotis;
-
-import java.sql.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Tester {
@@ -14,7 +10,9 @@ public class Tester {
         ArrayList<Book> result = new ArrayList<>();
 
         Library collection1 = new Library();
+
         boolean flag = false;
+
         String title;
         String author;
         String year;
@@ -51,15 +49,43 @@ public class Tester {
                     break;
                 case "2":
                     System.out.println("Which book would you like to remove? (enter the isbn)");
-                    String option = ans.nextLine();
-                    collection1.removeBook(option);
+                    isbn = ans.nextLine();
+                    collection1.removeBook(isbn);
+
+                    System.out.println("Succesfully removed the book: " + collection1.removedBook);
+                    break;
                 case "3":
                     System.out.println("Enter book title: ");
                     title = ans.nextLine();
-                    result.add(collection1.searchByTitle(title));
+                    ArrayList<Book> foundBooks = collection1.searchByTitle(title); //retreive amount of objects
+                    if (!foundBooks.isEmpty()) {
+                        System.out.println("Books by title found: "); //output list
+                        for (int i=0; i < foundBooks.size(); i++) {
+                            System.out.println(foundBooks.get(i));
+                        }
+                    }
+                    else System.out.println("There are no books with that title");
+                    break;
+                case "4":
+                    System.out.println("Enter book author: ");
+                    author = ans.nextLine();
+                    ArrayList<Book> byAuthor = collection1.searchByAuthor(author);
+                    if (!byAuthor.isEmpty()) {
+                        System.out.println("Books by author found: ");
+                        for (int i=0; i < byAuthor.size(); i++) {
+                            System.out.println(byAuthor.get(i));
+                        }
+                    }
+                    else System.out.println("There are no books by that author");
+                    break;
+                case "5":
+                    System.out.println("Here are all of the books: ");
+                    System.out.println(collection1);
+                    break;
+                case "6":
+                    flag = true;
                     break;
             }
          }
-
     }
 }
